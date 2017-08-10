@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url]
 
 * Студент: [Татьяна Дроздова](https://up.htmlacademy.ru/javascript/10/user/231246).
-* Наставник: `Неизвестно`.
+* Наставник: [Кирилл Пензин](https://htmlacademy.ru/profile/id91821).
 
 ---
 
