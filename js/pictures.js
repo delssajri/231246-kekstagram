@@ -28,7 +28,7 @@ var generateFotos = function(fotosCount, sampleComments) {
     objFoto = new Object(); // Создание объекта
 
     //Зададим объекту параметры
-    objFoto.url = 'photos/{{i}}.jpg';
+    objFoto.url = 'photos/' + (i + 1) +'.jpg';
     objFoto.likes = Math.floor(Math.random() * (200 - 15) + 15);
     objFoto.comments = generateComments(sampleComments);
 
@@ -37,5 +37,17 @@ var generateFotos = function(fotosCount, sampleComments) {
   }
   return setObjects;
 }
+  
+  var fotos = generateFotos(setObjectLength, setСomments);
+  var gallerys = document.querySelectorAll('.pictures');
+  var template = document.querySelector('#picture-template').content; //Находим шаблон 
 
-var fotos = generateFotos(setObjectLength, setСomments);
+
+for (var i = 0; i < setObjectLength; i++) {
+  elementFoto = template.cloneNode(true);
+  elementFoto.querySelector('.picture-comments').textContent = fotos[i].comments;
+  elementFoto.querySelector('.picture-likes').textContent = fotos[i].likes;
+  var elem = elementFoto.querySelectorAll('img');
+  elem[0].setAttribute('src', fotos[i].url);
+  gallerys[0].appendChild(elementFoto);
+}
