@@ -39,7 +39,7 @@ var generateFotos = function(fotosCount, sampleComments) {
 }
   
   var fotos = generateFotos(setObjectLength, setСomments);
-  var gallerys = document.querySelectorAll('.pictures');
+  var gallerys = document.querySelector('.pictures');
   var template = document.querySelector('#picture-template').content; //Находим шаблон 
 
 
@@ -47,7 +47,14 @@ for (var i = 0; i < setObjectLength; i++) {
   elementFoto = template.cloneNode(true);
   elementFoto.querySelector('.picture-comments').textContent = fotos[i].comments;
   elementFoto.querySelector('.picture-likes').textContent = fotos[i].likes;
-  var elem = elementFoto.querySelectorAll('img');
-  elem[0].setAttribute('src', fotos[i].url);
-  gallerys[0].appendChild(elementFoto);
+  var elem = elementFoto.querySelector('img');
+  elem.setAttribute('src', fotos[i].url);
+  gallerys.appendChild(elementFoto);
 }
+
+var galleryElement = document.querySelector('.gallery-overlay');
+galleryElement.classList.remove('hidden');
+var galleryImg = galleryElement.querySelector('img');
+galleryImg.setAttribute('src', fotos[0].url);
+galleryElement.querySelector('.comments-count').textContent= fotos[0].comments;
+galleryElement.querySelector('.likes-count').textContent = fotos[0].likes;
