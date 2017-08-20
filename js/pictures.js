@@ -28,7 +28,7 @@ var generateTestFotos = function (fotosCount, sampleComments) {
     var objFoto = {}; // Создание объекта
 
     // Зададим объекту параметры
-    objFoto.url = 'photos/' + (i + 1) +'.jpg';
+    objFoto.url = 'photos/' + (i + 1) + '.jpg';
     objFoto.likes = Math.floor(Math.random() * (200 - 15) + 15);
     objFoto.comments = generateTestComments(sampleComments);
 
