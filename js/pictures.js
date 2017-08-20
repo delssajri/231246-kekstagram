@@ -10,7 +10,7 @@ setСomments = [
 
 var setObjectLength = 25;
 
-var generateComments = function(sampleComments) {
+var generateTestComments = function(sampleComments) {
   var count = Math.random() > 0.5 ? 1 : 2;
   var comments = [];
   for (var i = 0; i < count; i++) {
@@ -20,8 +20,7 @@ var generateComments = function(sampleComments) {
   return comments;
 };
 
-
-var generateFotos = function(fotosCount, sampleComments) {
+var generateTestFotos = function(fotosCount, sampleComments) {
   var setObjects = [];
 
   for (var i = 0; i < fotosCount; i++) {
@@ -30,31 +29,53 @@ var generateFotos = function(fotosCount, sampleComments) {
     //Зададим объекту параметры
     objFoto.url = 'photos/' + (i + 1) +'.jpg';
     objFoto.likes = Math.floor(Math.random() * (200 - 15) + 15);
-    objFoto.comments = generateComments(sampleComments);
+    objFoto.comments = generateTestComments(sampleComments);
 
     //Запишем объект в массив объектов
     setObjects.push(objFoto);
   }
   return setObjects;
 }
-  
-  var fotos = generateFotos(setObjectLength, setСomments);
-  var gallerys = document.querySelector('.pictures');
-  var template = document.querySelector('#picture-template').content; //Находим шаблон 
 
-
-for (var i = 0; i < setObjectLength; i++) {
+var generateGalleryFoto = function(galleryPictures, template, foto) {
   elementFoto = template.cloneNode(true);
-  elementFoto.querySelector('.picture-comments').textContent = fotos[i].comments;
-  elementFoto.querySelector('.picture-likes').textContent = fotos[i].likes;
+  elementFoto.querySelector('.picture-comments').textContent = foto.comments;
+  elementFoto.querySelector('.picture-likes').textContent = foto.likes;
   var elem = elementFoto.querySelector('img');
-  elem.setAttribute('src', fotos[i].url);
-  gallerys.appendChild(elementFoto);
+  elem.setAttribute('src', foto.url);
+  galleryPictures.appendChild(elementFoto);
 }
 
-var galleryElement = document.querySelector('.gallery-overlay');
-galleryElement.classList.remove('hidden');
-var galleryImg = galleryElement.querySelector('img');
-galleryImg.setAttribute('src', fotos[0].url);
-galleryElement.querySelector('.comments-count').textContent= fotos[0].comments;
-galleryElement.querySelector('.likes-count').textContent = fotos[0].likes;
+var generateGallery = function(fotos) {
+  var galleryPictures = document.querySelector('.pictures');
+  var template = document.querySelector('#picture-template').content;
+
+  for (var i = 0; i < fotos.length; i++) {
+    generateGalleryFoto(galleryPictures, template, fotos[i]);
+  }
+}
+
+var configurePictureView = function(foto) {
+  var galleryElement = document.querySelector('.gallery-overlay');
+  var galleryImg = galleryElement.querySelector('img');
+
+  galleryImg.setAttribute('src', foto.url);
+  galleryElement.querySelector('.comments-count').textContent= foto.comments;
+  galleryElement.querySelector('.likes-count').textContent = foto.likes;
+}
+
+var showPicture = function(foto) {
+  configurePictureView(foto);
+
+  var galleryElement = document.querySelector('.gallery-overlay');
+  galleryElement.classList.remove('hidden');
+}
+
+var hidePicture = function() {
+  var galleryElement = document.querySelector('.gallery-overlay');
+  galleryElement.classList.add('hidden');
+}
+
+var fotos = generateTestFotos(setObjectLength, setСomments);
+generateGallery(fotos);
+showPicture(fotos[0]);
