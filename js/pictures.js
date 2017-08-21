@@ -38,23 +38,22 @@ var generateTestFotos = function (fotosCount, sampleComments) {
   return setObjects;
 };
 
-var generateGalleryFoto = function (galleryPictures, template, foto) {
-  var elementFoto = template.cloneNode(true);
-  elementFoto.querySelector('.picture-comments').textContent = foto.comments;
-  elementFoto.querySelector('.picture-likes').textContent = foto.likes;
-
-  var elem = elementFoto.querySelector('img');
-  elem.setAttribute('src', foto.url);
-  galleryPictures.appendChild(elementFoto);
-};
-
-var generateGallery = function (fotos) {
-  var galleryPictures = document.querySelector('.pictures');
+var generateGalleryFoto = function (foto) {
   var template = document.querySelector('#picture-template').content;
+  var elementFoto = template.cloneNode(true);
+  var fragment = document.createDocumentFragment();
+  var galleryPictures = document.querySelector('.pictures');
 
-  for (var i = 0; i < fotos.length; i++) {
-    generateGalleryFoto(galleryPictures, template, fotos[i]);
+  for (var i = 0; i < foto.length; i++) {
+    var elementFoto = template.cloneNode(true);
+    var elem = elementFoto.querySelector('img');
+    elem.setAttribute('src', foto[i].url);
+    elementFoto.querySelector('.picture-comments').textContent = foto[i].comments;
+    elementFoto.querySelector('.picture-likes').textContent = foto[i].likes;
+    fragment.appendChild(elementFoto);
   }
+
+  galleryPictures.appendChild(fragment);
 };
 
 var configurePictureView = function (foto) {
@@ -79,5 +78,5 @@ var showPicture = function (foto) {
 // };
 
 var fotos = generateTestFotos(setObjectLength, setСomments);
-generateGallery(fotos);
+generateGalleryFoto(fotos);
 showPicture(fotos[0]);
