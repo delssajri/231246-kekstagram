@@ -40,7 +40,6 @@ var generateTestFotos = function (fotosCount, sampleComments) {
 
 var generateGalleryFoto = function (foto) {
   var template = document.querySelector('#picture-template').content;
-  var elementFoto = template.cloneNode(true);
   var fragment = document.createDocumentFragment();
   var galleryPictures = document.querySelector('.pictures');
 
