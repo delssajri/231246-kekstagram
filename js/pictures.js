@@ -38,12 +38,12 @@ var generateTestFotos = function (fotosCount, sampleComments) {
   return setObjects;
 };
 
-var mkOnClickCallback = function(link, foto) {
-  return function(event) {
-      link.href = '#';
-      event.stopPropagation();
+var mkOnClickCallback = function (link, foto) {
+  return function (event) {
+    link.href = '#';
+    event.stopPropagation();
 
-      showPicture(foto);
+    showPicture(foto);
   };
 };
 
@@ -60,25 +60,25 @@ var generateGalleryFoto = function (foto) {
     elementFoto.querySelector('.picture-comments').textContent = foto[i].comments;
     elementFoto.querySelector('.picture-likes').textContent = foto[i].likes;
 
-    var link = elementFoto.querySelector('a')
+    var link = elementFoto.querySelector('a');
     link.addEventListener('click', mkOnClickCallback(link, foto[i]));
 
     fragment.appendChild(elementFoto);
   }
   galleryPictures.appendChild(fragment);
 
-  document.addEventListener('keydown', function(event) {
+  document.addEventListener('keydown', function (event) {
     if (event.keyCode === 27) {
       closePicture();
     }
   });
 
   var closeElement = document.querySelector('.gallery-overlay-close');
-  closeElement.addEventListener('click', function() {
+  closeElement.addEventListener('click', function () {
     closePicture();
   });
 
-  closeElement.addEventListener('keydown', function(event) {
+  closeElement.addEventListener('keydown', function (event) {
     if (event.keyCode === 13) {
       closePicture();
     }
