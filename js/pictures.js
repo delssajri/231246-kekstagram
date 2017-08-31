@@ -157,10 +157,10 @@ var updateFotoScale = function (value) {
     return;
   }
 
-  fieldScale.value = newScale + "%";
-  var scaleElem = "scale(" + (newScale/100) + ")";
+  fieldScale.value = newScale + '%';
+  var scaleElem = 'scale(' + (newScale/100) + ')';
   fotoScale.style.transform = scaleElem;
-}
+};
 
 buttonInc.addEventListener('click', function () {
   updateFotoScale(25);
@@ -177,9 +177,9 @@ var validateHashTag = function (hashTagValue) {
     return true;
   }
 
-  var nonemptyTags = hashTagValue.split(' ').filter(
-    function(v) {return v.length ? true : false;
-    });
+var nonemptyTags = hashTagValue.split(' ').filter(
+  function (v) { return v.length ? true : false;
+  });
   if (nonemptyTags.length === 0) {
     return true;
   }
@@ -192,17 +192,17 @@ var validateHashTag = function (hashTagValue) {
   if (uniqueHashTags.length > 5) {
     return false;
   }
-  if (nonemptyTags.length !== uniqueHashTags.length)
+  if (nonemptyTags.length !== uniqueHashTags.length) {
     return false;
+  }
   var validTags = uniqueHashTags.filter (
-    function(v) {
+    function (v) {
       if ((v.length < 2) || (v.length > 20)) {
         return false;
       }
       return v.startsWith('#');
-    }); 
+    });
   return uniqueHashTags.length === validTags.length;
-
 };
 
 var fotoComment = formLoad.querySelector('.upload-form-description');
@@ -211,10 +211,12 @@ var validateComment = function (comment) {
 };
 
 var highLightError = function (element, highlight) {
-  if (highlight)
-    element.style.border = "1px solid red";
-  else
-    element.style.border = "";
+  if (highlight) {
+    element.style.border = '1px solid red';
+  }
+  else {
+    element.style.border = '';
+  }
 };
 
 var validateForm = function () {
