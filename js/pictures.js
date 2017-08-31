@@ -158,7 +158,7 @@ var updateFotoScale = function (value) {
   }
 
   fieldScale.value = newScale + '%';
-  var scaleElem = 'scale(' + (newScale/100) + ')';
+  var scaleElem = 'scale(' + (newScale / 100) + ')';
   fotoScale.style.transform = scaleElem;
 };
 
@@ -177,8 +177,8 @@ var validateHashTag = function (hashTagValue) {
     return true;
   }
 
-var nonemptyTags = hashTagValue.split(' ').filter(
-  function (v) { return v.length ? true : false;
+var nonemptyTags = hashTagValue.split(' ').filter(function (v) { 
+  return v.length ? true : false;
   });
   if (nonemptyTags.length === 0) {
     return true;
@@ -195,13 +195,12 @@ var nonemptyTags = hashTagValue.split(' ').filter(
   if (nonemptyTags.length !== uniqueHashTags.length) {
     return false;
   }
-  var validTags = uniqueHashTags.filter (
-    function (v) {
-      if ((v.length < 2) || (v.length > 20)) {
-        return false;
-      }
-      return v.startsWith('#');
-    });
+  var validTags = uniqueHashTags.filter ( function (v) {
+    if ((v.length < 2) || (v.length > 20)) {
+      return false;
+    }
+    return v.startsWith('#');
+  });
   return uniqueHashTags.length === validTags.length;
 };
 
