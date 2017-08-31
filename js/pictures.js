@@ -133,7 +133,7 @@ var closeUpload = function () {
 var fotoEffect = formLoad.querySelectorAll('[name = "effect"]');
 var knownEffect = [];
 for (var i = 0; i < fotoEffect.length; i++) {
-  fotoEffect[i].addEventListener('change', function (event) { 
+  fotoEffect[i].addEventListener('change', function (event) {
     var fotoPreview = formLoad.querySelector('.effect-image-preview');
     var effectName = 'effect-' + event.target.value;
     for (var j = 0; j < knownEffect.length; j++) {
@@ -144,19 +144,20 @@ for (var i = 0; i < fotoEffect.length; i++) {
   knownEffect.push('effect-' + fotoEffect[i].value);
 }
 
-// Изменение масштаба изображения 
+// Изменение масштаба изображения
 var buttonInc = formLoad.querySelector('.upload-resize-controls-button-inc');
 var buttonDec = formLoad.querySelector('.upload-resize-controls-button-dec');
 var fieldScale = formLoad.querySelector('.upload-resize-controls-value');
 var fotoScale = formLoad.querySelector('.effect-image-preview');
 
 var updateFotoScale = function (value) {
-  var scale = parseInt(fieldScale.value);
+  var scale = parseInt(fieldScale.value, 10);
   var newScale = scale + value;
-  if (newScale < 25 || newScale > 100)
+  if (newScale < 25 || newScale > 100) {
     return;
+  }
 
-  fieldScale.value = newScale + '%';
+  fieldScale.value = newScale + "%";
   var scaleElem = "scale(" + (newScale/100) + ")";
   fotoScale.style.transform = scaleElem;
 }
@@ -172,23 +173,26 @@ buttonDec.addEventListener('click', function () {
 // Хеш-теги
 var hashTag = formLoad.querySelector('.upload-form-hashtags');
 var validateHashTag = function (hashTagValue) {
-  if (hashTagValue.length === 0)
+  if (hashTagValue.length === 0) {
     return true;
+  }
 
   var nonemptyTags = hashTagValue.split(' ').filter(
     function(v) {return v.length ? true : false;
     });
-  if (nonemptyTags.length === 0)
+  if (nonemptyTags.length === 0) {
     return true;
+  }
 
   var onlyUnique = function (value, index, self) {
     return self.indexOf(value) === index;
   };
 
   var uniqueHashTags = nonemptyTags.filter(onlyUnique);
-  if (uniqueHashTags.length > 5)
+  if (uniqueHashTags.length > 5) {
     return false;
-  if (nonemptyTags.length != uniqueHashTags.length)
+  }
+  if (nonemptyTags.length !== uniqueHashTags.length)
     return false;
   var validTags = uniqueHashTags.filter (
     function(v) {
@@ -227,8 +231,4 @@ formLoad.addEventListener('submit', function (event) {
   if (!validateForm()) {
     event.preventDefault();
   }
-});
-
-hashTag.addEventListener('change', function (event) {
-  var target = event.target;
 });
