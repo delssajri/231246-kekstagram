@@ -210,12 +210,9 @@ var validateComment = function (comment) {
 };
 
 var highLightError = function (element, highlight) {
-  if (highlight)
-  {
+  if (highlight) {
     element.style.border = '1px solid red';
-  }
-  else
-  {
+  } else {
     element.style.border = '';
   }
 };
