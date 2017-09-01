@@ -68,7 +68,7 @@ var generateGalleryFoto = function (foto) {
   galleryPictures.appendChild(fragment);
 
   document.addEventListener('keydown', function (event) {
-    if (event.keyCode === 27)  {
+    if (event.keyCode === 27) {
       closePicture();
       closeUpload();
     }
@@ -231,7 +231,7 @@ var validateHashTag = function (hashTagValue) {
   return uniqueHashTags.length === validTags.length;
 };
 
-//var fotoComment = formLoad.querySelector('.upload-form-description');
+// var fotoComment = formLoad.querySelector('.upload-form-description');
 var validateComment = function (comment) {
   return comment.length >= 30;
 };
