@@ -68,7 +68,7 @@ var generateGalleryFoto = function (foto) {
   galleryPictures.appendChild(fragment);
 
   document.addEventListener('keydown', function (event) {
-    if (event.keyCode === 27) {
+    if (event.keyCode === 27)  {
       closePicture();
       closeUpload();
     }
@@ -119,6 +119,7 @@ var formLoad = document.querySelector('.upload-form');
 var fileName = document.querySelector('#upload-file');
 // Найдем форму кадрирования
 var frameFoto = formLoad.querySelector('.upload-overlay');
+var btnClose = formLoad.querySelector('.upload-form-cancel');
 
 // При загрузки изображения появляется форма кадрирования
 fileName.addEventListener('change', function () {
@@ -129,9 +130,35 @@ var closeUpload = function () {
   frameFoto.classList.add('hidden');
 };
 
+btnClose.addEventListener('click', function () {
+  closeUpload();
+});
+
+var fotoComment = formLoad.querySelector('.upload-form-description');
+fotoComment.addEventListener('keydown', function (event) {
+  if (event.keyCode === 27) {
+    event.stopPropagation();
+  }
+});
+
 // Применим эффект к изображению
 var fotoEffect = formLoad.querySelectorAll('[name = "effect"]');
 var knownEffect = [];
+var containerEffect = formLoad.querySelector('.upload-effect-controls');
+containerEffect.addEventListener('change', function (event) {
+  if (event.target.tagName !== '.effect-image-preview') {
+    return;
+  }
+  var fotoPreview = formLoad.querySelector('.effect-image-preview');
+  var effectName = 'effect-' + event.target.value;
+  for (var i = 0; i < fotoEffect.length; i++) {
+    for (var j = 0; j < knownEffect.length; j++) {
+      fotoPreview.classList.remove(knownEffect[j]);
+    }
+    fotoPreview.classList.add(effectName);
+    knownEffect.push('effect-' + fotoEffect[i].value);
+  }
+});
 for (var i = 0; i < fotoEffect.length; i++) {
   fotoEffect[i].addEventListener('change', function (event) {
     var fotoPreview = formLoad.querySelector('.effect-image-preview');
@@ -204,7 +231,7 @@ var validateHashTag = function (hashTagValue) {
   return uniqueHashTags.length === validTags.length;
 };
 
-var fotoComment = formLoad.querySelector('.upload-form-description');
+//var fotoComment = formLoad.querySelector('.upload-form-description');
 var validateComment = function (comment) {
   return comment.length >= 30;
 };
