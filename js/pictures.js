@@ -177,9 +177,9 @@ var validateHashTag = function (hashTagValue) {
     return true;
   }
 
-var nonemptyTags = hashTagValue.split(' ').filter(function (v) {
-  return v.length ? true : false;
-});
+  var nonemptyTags = hashTagValue.split(' ').filter(function (v) {
+    return v.length ? true : false;
+  });
   if (nonemptyTags.length === 0) {
     return true;
   }
@@ -195,7 +195,7 @@ var nonemptyTags = hashTagValue.split(' ').filter(function (v) {
   if (nonemptyTags.length !== uniqueHashTags.length) {
     return false;
   }
-  var validTags = uniqueHashTags.filter (function (v) {
+  var validTags = uniqueHashTags.filter(function (v) {
     if ((v.length < 2) || (v.length > 20)) {
       return false;
     }
@@ -210,7 +210,8 @@ var validateComment = function (comment) {
 };
 
 var highLightError = function (element, highlight) {
-  if (highlight) {
+  if (highlight)
+  {
     element.style.border = '1px solid red';
   }
   else
