@@ -14,9 +14,9 @@ var showPicture = window.preview.showPicture;
   };
 
   // Заполняем галлерею фотографиями, используя template
-  window.pictures = { 
+  window.pictures = {
     generateGalleryFoto: function () {
-      var foto = generateTestFotos(fotosPerPage);
+      var foto = window.data.generateTestFotos(fotosPerPage);
       var template = document.querySelector('#picture-template').content;
       var fragment = document.createDocumentFragment();
       var galleryPictures = document.querySelector('.pictures');

@@ -18,10 +18,10 @@
     closeUpload: function () {
       frameFoto.classList.add('hidden');
     }
-  }
+  };
 
   btnClose.addEventListener('click', function () {
-    closeUpload();
+    window.form.closeUpload();
   });
 
   var fotoComment = formLoad.querySelector('.upload-form-description');

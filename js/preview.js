@@ -12,7 +12,7 @@
   };
 
   // Функция показа фотографии
-  window.preview = { 
+  window.preview = {
     showPicture: function (foto) {
       configurePictureView(foto);
       var galleryElement = document.querySelector('.gallery-overlay');
