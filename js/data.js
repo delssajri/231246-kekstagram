@@ -11,7 +11,7 @@
   ];
 
   window.data = {
-    generateTestComments: function (setСomments) {
+    generateTestComments: function () {
       var count = Math.random() > 0.5 ? 1 : 2;
       var comments = [];
       for (var i = 0; i < count; i++) {
