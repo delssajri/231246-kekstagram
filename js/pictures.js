@@ -16,7 +16,7 @@ var showPicture = window.preview.showPicture;
   // Заполняем галлерею фотографиями, используя template
   window.pictures = {
     generateGalleryFoto: function () {
-      var foto = window.data.generateTestFotos(fotosPerPage);
+      var foto = window.generateTestFotos(fotosPerPage);
       var template = document.querySelector('#picture-template').content;
       var fragment = document.createDocumentFragment();
       var galleryPictures = document.querySelector('.pictures');
