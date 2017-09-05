@@ -1,8 +1,6 @@
 'use strict';
 
 var fotosPerPage = 25;
-var generateTestComments = window.data.generateTestComments;
-var generateTestFotos = window.data.generateTestFotos;
 var showPicture = window.preview.showPicture;
 
 (function () {
