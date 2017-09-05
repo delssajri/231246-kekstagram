@@ -18,7 +18,7 @@
         var randomComment = setСomments[Math.floor(Math.random() * setСomments.length)];
         comments.push(randomComment);
       }
-    return comments;
+      return comments;
     },
     generateTestFotos: function (setObjectLength) {
       var setObjects = [];
@@ -28,7 +28,6 @@
         objFoto.url = 'photos/' + (i + 1) + '.jpg';
         objFoto.likes = Math.floor(Math.random() * (200 - 15) + 15);
         objFoto.comments = generateTestComments(setСomments);
-        // Запишем объект в массив объектов
         setObjects.push(objFoto);
       }
       return setObjects;
