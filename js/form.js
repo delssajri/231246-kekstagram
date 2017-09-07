@@ -31,6 +31,75 @@
     }
   });
 
+  var showSlider = function (show) {
+    var sliderView = document.querySelector(".upload-effect-level");
+    if (show) {
+      sliderView.classList.remove('hidden');
+    } else {
+      sliderView.classList.add('hidden');
+    }
+  };
+
+  var applyFilterStyle = function (name) {
+    var fotoPreview = formLoad.querySelector('.effect-image-preview');
+    var effectName = 'effect-' + name;
+    for (var i = 0; i < fotoEffect.length; i++) {
+      for (var j = 0; j < knownEffect.length; j++) {
+        fotoPreview.classList.remove(knownEffect[j]);
+      }
+      fotoPreview.classList.add(effectName);
+      knownEffect.push('effect-' + fotoEffect[i].value);
+    }
+  };
+
+  var activeFilter = "none";
+  var filterFunctions = {
+    "none": {
+      selectFilter: function () {
+        showSlider(false);
+        applyFilterStyle("none");
+      },
+      updateFilter: function (percents) {
+      }
+    },
+    "chrome": {
+      selectFilter: function () {
+        showSlider(true);
+        applyFilterStyle("chrome");
+        updateFilter(20);
+      },
+      updateFilter: function (percents) {
+        var fotoPreview = formLoad.querySelector('.effect-image-preview');
+        fotoPreview.style.filter = "grayscale(" + percents / 100 + ")";
+      }
+    },
+    "sepia": {
+      selectFilter: function () {
+        showSlider(true);
+        applyFilterStyle("sepia");
+        updateFilter(20);
+      },
+      updateFilter: function (percents) {
+        var fotoPreview = formLoad.querySelector('.effect-image-preview');
+        fotoPreview.style.filter = "sepia(" + percents / 100 + ")";
+      }
+    }
+  };
+
+  var activateFilter = function (name) {
+    console.log(name);
+    var filterFuncs = filterFunctions[name];
+    activeFilter = name;
+    filterFuncs.selectFilter(name);
+  }
+
+  var updateFilter = function (percents) {
+    updateSliderView(percents);
+
+    var filterFuncs = filterFunctions[activeFilter];
+    filterFuncs.updateFilter(percents);
+  }
+
   // Применим эффект к изображению
   var fotoEffect = formLoad.querySelectorAll('[name = "effect"]');
   var knownEffect = [];
@@ -39,24 +108,18 @@
     if (event.target.tagName !== '.effect-image-preview') {
       return;
     }
-    var fotoPreview = formLoad.querySelector('.effect-image-preview');
-    var effectName = 'effect-' + event.target.value;
-    for (var i = 0; i < fotoEffect.length; i++) {
-      for (var j = 0; j < knownEffect.length; j++) {
-        fotoPreview.classList.remove(knownEffect[j]);
-      }
-      fotoPreview.classList.add(effectName);
-      knownEffect.push('effect-' + fotoEffect[i].value);
-    }
+    activateFilter(event.target.value);
   });
+
   for (var i = 0; i < fotoEffect.length; i++) {
     fotoEffect[i].addEventListener('change', function (event) {
-      var fotoPreview = formLoad.querySelector('.effect-image-preview');
-      var effectName = 'effect-' + event.target.value;
-      for (var j = 0; j < knownEffect.length; j++) {
-        fotoPreview.classList.remove(knownEffect[j]);
-      }
-      fotoPreview.classList.add(effectName);
+      activateFilter(event.target.value);
+      // var fotoPreview = formLoad.querySelector('.effect-image-preview');
+      // var effectName = 'effect-' + event.target.value;
+      // for (var j = 0; j < knownEffect.length; j++) {
+      //   fotoPreview.classList.remove(knownEffect[j]);
+      // }
+      // fotoPreview.classList.add(effectName);
     });
     knownEffect.push('effect-' + fotoEffect[i].value);
   }
@@ -156,12 +219,11 @@
   var lineControl = document.querySelector(".upload-effect-level-line");
   var valueControl = document.querySelector(".upload-effect-level-val");
 
-  var updateSliderView = function (x, percents) {
+  var updateSliderView = function (percents) {
+    var x = percents / 100 * lineControl.clientWidth;
+
     slider.style.left = x + 'px';
     valueControl.style.width = percents + '%';
-  };
-
-  var updateFilter = function (percents) {
   };
 
   slider.addEventListener('mousedown', function(event) {
@@ -180,9 +242,7 @@
       xStart = moveEvent.clientX;
 
       var percents = x / lineControl.clientWidth * 100;
-
-      updateSliderView(x, percents);
-      updateFilter(percents)
+      updateFilter(percents);
     };
 
     var onMouseUp = function (upEvent) {
@@ -195,4 +255,6 @@
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
   });
+
+  activateFilter("none");
 })();
