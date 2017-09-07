@@ -149,4 +149,50 @@
       event.preventDefault();
     }
   });
+
+  //Будем изменять свойства изображений в зависимости от положения ползунка
+  // Найдем объект DOM ползунок
+  var slider = document.querySelector(".upload-effect-level-pin");
+  var lineControl = document.querySelector(".upload-effect-level-line");
+  var valueControl = document.querySelector(".upload-effect-level-val");
+
+  var updateSliderView = function (x, percents) {
+    slider.style.left = x + 'px';
+    valueControl.style.width = percents + '%';
+  };
+
+  var updateFilter = function (percents) {
+  };
+
+  slider.addEventListener('mousedown', function(event) {
+    event.preventDefault();
+
+    var xStart = event.clientX;
+
+    var onMouseMove = function (moveEvent) {
+      moveEvent.preventDefault();
+
+      var xShift = moveEvent.clientX - xStart;
+      var x = slider.offsetLeft + xShift;
+      if (x < 0 || lineControl.clientWidth <= x)
+        return;
+
+      xStart = moveEvent.clientX;
+
+      var percents = x / lineControl.clientWidth * 100;
+
+      updateSliderView(x, percents);
+      updateFilter(percents)
+    };
+
+    var onMouseUp = function (upEvent) {
+      upEvent.preventDefault();
+
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseup', onMouseUp);
+    };
+
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
+  });
 })();
