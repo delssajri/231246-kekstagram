@@ -32,7 +32,7 @@
   });
 
   var showSlider = function (show) {
-    var sliderView = document.querySelector(".upload-effect-level");
+    var sliderView = document.querySelector('.upload-effect-level');
     if (show) {
       sliderView.classList.remove('hidden');
     } else {
@@ -52,39 +52,39 @@
     }
   };
 
-  var activeFilter = "none";
+  var activeFilter = 'none';
   var filterFunctions = {
-    "none": {
+    'none': {
       selectFilter: function () {
         showSlider(false);
-        applyFilterStyle("none");
+        applyFilterStyle('none');
       },
       updateFilter: function (percents) {
       }
     },
-    "chrome": {
+    'chrome': {
       selectFilter: function () {
         showSlider(true);
-        applyFilterStyle("chrome");
+        applyFilterStyle('chrome');
         updateFilter(20);
       },
       updateFilter: function (percents) {
         var fotoPreview = formLoad.querySelector('.effect-image-preview');
-        fotoPreview.style.filter = "grayscale(" + percents / 100 + ")";
+        fotoPreview.style.filter = 'grayscale(' + percents / 100 + ')';
       }
     },
-    "sepia": {
+    'sepia': {
       selectFilter: function () {
         showSlider(true);
-        applyFilterStyle("sepia");
+        applyFilterStyle('sepia');
         updateFilter(20);
       },
       updateFilter: function (percents) {
         var fotoPreview = formLoad.querySelector('.effect-image-preview');
-        fotoPreview.style.filter = "sepia(" + percents / 100 + ")";
+        fotoPreview.style.filter = 'sepia(' + percents / 100 + ')';
       }
     },
-    "marvin": {
+    'marvin': {
       selectFilter: function () {
         showSlider(true);
         applyFilterStyle("marvin");
@@ -92,29 +92,29 @@
       },
       updateFilter: function (percents) {
         var fotoPreview = formLoad.querySelector('.effect-image-preview');
-        fotoPreview.style.filter = "invert(" + percents + "%)";
+        fotoPreview.style.filter = 'invert(' + percents + '%)';
       }
     },
-    "phobos": {
+    'phobos': {
       selectFilter: function () {
         showSlider(true);
-        applyFilterStyle("phobos");
+        applyFilterStyle('phobos');
         updateFilter(20);
       },
       updateFilter: function (percents) {
         var fotoPreview = formLoad.querySelector('.effect-image-preview');
-        fotoPreview.style.filter = "blur(" + 3 * percents / 100 + "px)";
+        fotoPreview.style.filter = 'blur(' + 3 * percents / 100 + 'px)';
       }
     },
-    "heat": {
+    'heat': {
       selectFilter: function () {
         showSlider(true);
-        applyFilterStyle("heat");
+        applyFilterStyle('heat');
         updateFilter(20);
       },
       updateFilter: function (percents) {
         var fotoPreview = formLoad.querySelector('.effect-image-preview');
-        fotoPreview.style.filter = "brightness(" + 3 * percents / 100 + ")";
+        fotoPreview.style.filter = 'brightness(' + 3 * percents / 100 + ')';
       }
     }
   };
@@ -124,14 +124,14 @@
     var filterFuncs = filterFunctions[name];
     activeFilter = name;
     filterFuncs.selectFilter(name);
-  }
+  };
 
   var updateFilter = function (percents) {
     updateSliderView(percents);
 
     var filterFuncs = filterFunctions[activeFilter];
     filterFuncs.updateFilter(percents);
-  }
+  };
 
   // Применим эффект к изображению
   var fotoEffect = formLoad.querySelectorAll('[name = "effect"]');
@@ -246,11 +246,11 @@
     }
   });
 
-  //Будем изменять свойства изображений в зависимости от положения ползунка
+  // Будем изменять свойства изображений в зависимости от положения ползунка
   // Найдем объект DOM ползунок
-  var slider = document.querySelector(".upload-effect-level-pin");
-  var lineControl = document.querySelector(".upload-effect-level-line");
-  var valueControl = document.querySelector(".upload-effect-level-val");
+  var slider = document.querySelector('.upload-effect-level-pin');
+  var lineControl = document.querySelector('.upload-effect-level-line');
+  var valueControl = document.querySelector('.upload-effect-level-val');
 
   var updateSliderView = function (percents) {
     var x = percents / 100 * lineControl.clientWidth;
@@ -259,7 +259,7 @@
     valueControl.style.width = percents + '%';
   };
 
-  slider.addEventListener('mousedown', function(event) {
+  slider.addEventListener('mousedown', function (event) {
     event.preventDefault();
 
     var xStart = event.clientX;
