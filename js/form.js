@@ -83,6 +83,39 @@
         var fotoPreview = formLoad.querySelector('.effect-image-preview');
         fotoPreview.style.filter = "sepia(" + percents / 100 + ")";
       }
+    },
+    "marvin": {
+      selectFilter: function () {
+        showSlider(true);
+        applyFilterStyle("marvin");
+        updateFilter(20);
+      },
+      updateFilter: function (percents) {
+        var fotoPreview = formLoad.querySelector('.effect-image-preview');
+        fotoPreview.style.filter = "invert(" + percents + "%)";
+      }
+    },
+    "phobos": {
+      selectFilter: function () {
+        showSlider(true);
+        applyFilterStyle("phobos");
+        updateFilter(20);
+      },
+      updateFilter: function (percents) {
+        var fotoPreview = formLoad.querySelector('.effect-image-preview');
+        fotoPreview.style.filter = "blur(" + 3 * percents / 100 + "px)";
+      }
+    },
+    "heat": {
+      selectFilter: function () {
+        showSlider(true);
+        applyFilterStyle("heat");
+        updateFilter(20);
+      },
+      updateFilter: function (percents) {
+        var fotoPreview = formLoad.querySelector('.effect-image-preview');
+        fotoPreview.style.filter = "brightness(" + 3 * percents / 100 + ")";
+      }
     }
   };
 
