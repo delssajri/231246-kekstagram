@@ -87,7 +87,7 @@
     'marvin': {
       selectFilter: function () {
         showSlider(true);
-        applyFilterStyle("marvin");
+        applyFilterStyle('marvin');
         updateFilter(20);
       },
       updateFilter: function (percents) {
@@ -120,7 +120,6 @@
   };
 
   var activateFilter = function (name) {
-    console.log(name);
     var filterFuncs = filterFunctions[name];
     activeFilter = name;
     filterFuncs.selectFilter(name);
@@ -269,8 +268,9 @@
 
       var xShift = moveEvent.clientX - xStart;
       var x = slider.offsetLeft + xShift;
-      if (x < 0 || lineControl.clientWidth <= x)
+      if (x < 0 || lineControl.clientWidth <= x) {
         return;
+      }
 
       xStart = moveEvent.clientX;
 
@@ -289,5 +289,5 @@
     document.addEventListener('mouseup', onMouseUp);
   });
 
-  activateFilter("none");
+  activateFilter('none');
 })();
