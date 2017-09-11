@@ -135,52 +135,14 @@
   // Применим эффект к изображению
   var fotoEffect = formLoad.querySelectorAll('[name = "effect"]');
   var knownEffect = [];
-  var containerEffect = formLoad.querySelector('.upload-effect-controls');
-  containerEffect.addEventListener('change', function (event) {
-    if (event.target.tagName !== '.effect-image-preview') {
-      return;
-    }
-    activateFilter(event.target.value);
-  });
-
-  for (var i = 0; i < fotoEffect.length; i++) {
-    fotoEffect[i].addEventListener('change', function (event) {
-      activateFilter(event.target.value);
-      // var fotoPreview = formLoad.querySelector('.effect-image-preview');
-      // var effectName = 'effect-' + event.target.value;
-      // for (var j = 0; j < knownEffect.length; j++) {
-      //   fotoPreview.classList.remove(knownEffect[j]);
-      // }
-      // fotoPreview.classList.add(effectName);
-    });
-    knownEffect.push('effect-' + fotoEffect[i].value);
-  }
 
   // Изменение масштаба изображения
-  var buttonInc = formLoad.querySelector('.upload-resize-controls-button-inc');
-  var buttonDec = formLoad.querySelector('.upload-resize-controls-button-dec');
-  var fieldScale = formLoad.querySelector('.upload-resize-controls-value');
   var fotoScale = formLoad.querySelector('.effect-image-preview');
-
   var updateFotoScale = function (value) {
-    var scale = parseInt(fieldScale.value, 10);
-    var newScale = scale + value;
-    if (newScale < 25 || newScale > 100) {
-      return;
-    }
-
-    fieldScale.value = newScale + '%';
-    var scaleElem = 'scale(' + (newScale / 100) + ')';
-    fotoScale.style.transform = scaleElem;
+    fotoScale.style.transform = 'scale(' + (value / 100) + ')';
   };
 
-  buttonInc.addEventListener('click', function () {
-    updateFotoScale(25);
-  });
-
-  buttonDec.addEventListener('click', function () {
-    updateFotoScale(-25);
-  });
+  window.initializeScale('.upload-resize-controls', updateFotoScale, 25, 100, 25, 100);
 
   // Хеш-теги
   var hashTag = formLoad.querySelector('.upload-form-hashtags');
@@ -289,5 +251,6 @@
     document.addEventListener('mouseup', onMouseUp);
   });
 
-  activateFilter('none');
+  var containerEffect = formLoad.querySelector('.upload-effect-controls');
+  window.initializeFilters(containerEffect, activateFilter);
 })();
