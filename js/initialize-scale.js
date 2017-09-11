@@ -17,8 +17,9 @@
 
     var updateScale = function (diff) {
       var newValue = value + diff;
-      if (newValue < minScale || maxScale < newValue)
+      if (newValue < minScale || maxScale < newValue) {
         return;
+      }
 
       value = newValue;
       textScale.value = value + '%';
