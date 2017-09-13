@@ -11,7 +11,7 @@
   };
 
   var onLoadError = function (status, error) {
-    window.location = "https://htmlacademy.ru";
+    window.location = 'https://htmlacademy.ru';
   };
 
   var loadTestFotos = function (onLoad) {
