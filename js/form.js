@@ -4,6 +4,7 @@
 // Найдем поле загрузки изображений
 (function () {
   var formLoad = document.querySelector('.upload-form');
+
   var fileName = document.querySelector('#upload-file');
   // Найдем форму кадрирования
   var frameFoto = formLoad.querySelector('.upload-overlay');
@@ -253,4 +254,33 @@
 
   var containerEffect = formLoad.querySelector('.upload-effect-controls');
   window.initializeFilters(containerEffect, activateFilter);
+
+  var onSaved = function (response) {
+    frameFoto.classList.add('hidden');
+  };
+
+  var onSaveError = function (status, error) {
+    var uploadMessage = document.querySelector('.upload-message');
+    var message = 'Неизвестная ошибка';
+    switch (Math.floor(status / 100)) {
+      case 3:
+        message = 'Не удалось сохранить фото: изменился адрес сервера, обновите страницу';
+        break;
+      case 4:
+        message = 'Не удалось сохранить фото: неверный формат запроса, обновите страницу';
+        break;
+      case 5:
+        message = 'Не удалось сохранить фото: ошибка сервера';
+        break;
+    }
+    uploadMessage.innerHTML = message;
+    uploadMessage.style.zIndex = 1000;
+    uploadMessage.classList.remove('hidden');
+  };
+
+  formLoad.addEventListener('submit', function (event) {
+    var formData = new FormData(formLoad);
+    window.backend.save(formData, onSaved, onSaveError);
+    event.preventDefault();
+  });
 })();

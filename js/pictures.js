@@ -1,6 +1,5 @@
 'use strict';
 
-var fotosPerPage = 25;
 var showPicture = window.preview.showPicture;
 
 (function () {
@@ -15,21 +14,21 @@ var showPicture = window.preview.showPicture;
 
   // Заполняем галлерею фотографиями, используя template
   window.pictures = {
-    generateGalleryFoto: function () {
-      var foto = window.generateTestFotos(fotosPerPage);
+    generateGalleryFoto: function (fotos) {
+      // var foto = window.generateTestFotos(fotosPerPage);
       var template = document.querySelector('#picture-template').content;
       var fragment = document.createDocumentFragment();
       var galleryPictures = document.querySelector('.pictures');
 
-      for (var i = 0; i < foto.length; i++) {
+      for (var i = 0; i < fotos.length; i++) {
         var elementFoto = template.cloneNode(true);
         var elem = elementFoto.querySelector('img');
-        elem.setAttribute('src', foto[i].url);
-        elementFoto.querySelector('.picture-comments').textContent = foto[i].comments;
-        elementFoto.querySelector('.picture-likes').textContent = foto[i].likes;
+        elem.setAttribute('src', fotos[i].url);
+        elementFoto.querySelector('.picture-comments').textContent = fotos[i].comments;
+        elementFoto.querySelector('.picture-likes').textContent = fotos[i].likes;
 
         var link = elementFoto.querySelector('a');
-        link.addEventListener('click', mkOnClickCallback(link, foto[i]));
+        link.addEventListener('click', mkOnClickCallback(link, fotos[i]));
 
         fragment.appendChild(elementFoto);
       }
