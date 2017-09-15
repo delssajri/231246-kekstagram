@@ -14,11 +14,15 @@ var showPicture = window.preview.showPicture;
 
   // Заполняем галлерею фотографиями, используя template
   window.pictures = {
-    generateGalleryFoto: function (fotos) {
+    generateGalleryHtml: function (fotos) {
       // var foto = window.generateTestFotos(fotosPerPage);
       var template = document.querySelector('#picture-template').content;
       var fragment = document.createDocumentFragment();
       var galleryPictures = document.querySelector('.pictures');
+
+      while (galleryPictures.firstChild) {
+        galleryPictures.removeChild(galleryPictures.firstChild);
+      }
 
       for (var i = 0; i < fotos.length; i++) {
         var elementFoto = template.cloneNode(true);
