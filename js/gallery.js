@@ -109,10 +109,16 @@
     showFilteredFotos(fotosFromServer);
   };
 
+  var showFilterToolbar = function () {
+    var filterToolbar = document.querySelector('.filters');
+    filterToolbar.classList.remove('hidden');
+  };
+
   var onFotosLoaded = function (fotos) {
     fotosFromServer = fotos;
 
     resetPreferenceFilter();
+    showFilterToolbar();
     showFilteredFotos(fotosFromServer);
   };
 
