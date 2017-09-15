@@ -57,7 +57,7 @@
       fotos = fotos.slice(0);
       fotos.filter(function (a) {
         var r = Math.random();
-        return 0.1 < r;
+        return r > 0.1;
       });
       shuffleArray(fotos);
       return fotos;
